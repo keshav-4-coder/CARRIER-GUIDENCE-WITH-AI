@@ -13,6 +13,7 @@ google-auth-httplib2>=0.2.0,<1.0.0
 # Anthropic API (NEW SDK)
 anthropic>=0.25.0
 httpx>=0.23.0,<0.28.0
+anthropic
 
 # Database (if using PostgreSQL later)
 # psycopg2-binary==2.9.9
