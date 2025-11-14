@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')  # Add this to .env
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 
 if not ANTHROPIC_API_KEY:
     print("WARNING: ANTHROPIC_API_KEY not found! Set it in your .env file")
@@ -30,19 +30,22 @@ FRONTEND_DIR = BASE_DIR.parent / 'myproject-frontend' / 'dist'
 # ---------------------------
 # Security settings
 # ---------------------------
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-if not SECRET_KEY:
-    raise ValueError("DJANGO_SECRET_KEY is required in .env file!")
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-fallback-key-change-in-production')
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-
-# In settings.py, replace ALLOWED_HOSTS line with:
+# ALLOWED_HOSTS - supports both local development and Render deployment
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')
+    'carrier-guidence-with-ai.onrender.com',
+    '.onrender.com',  # Allow all Render subdomains
 ]
+
+# Add Render's external hostname if it exists
+render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
 
 # ---------------------------
 # Application definition
@@ -60,7 +63,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
 
     # Project apps
-    'accounts',  # NEW: Authentication app
+    'accounts',
     'chat',
     'mentors',
 ]
@@ -68,6 +71,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
@@ -109,7 +113,7 @@ DATABASES = {
 # ---------------------------
 # Custom User Model
 # ---------------------------
-AUTH_USER_MODEL = 'accounts.User'  # NEW: Use custom User model
+AUTH_USER_MODEL = 'accounts.User'
 
 # ---------------------------
 # Password validation
@@ -130,12 +134,18 @@ USE_I18N = True
 USE_TZ = True
 
 # ---------------------------
-# Static files
+# Static files (CSS, JavaScript, Images)
 # ---------------------------
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Include React build files
 STATICFILES_DIRS = [FRONTEND_DIR] if FRONTEND_DIR.exists() else []
+
+# WhiteNoise configuration for serving static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ---------------------------
 # REST Framework + JWT
@@ -185,6 +195,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
+    'https://carrier-guidence-with-ai.onrender.com',  # Add your production domain
 ]
 
 CORS_ALLOW_CREDENTIALS = True
