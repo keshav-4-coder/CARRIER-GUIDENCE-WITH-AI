@@ -1,0 +1,268 @@
+/* ================================
+   Landing Page - Bright Modern Style
+   ================================ */
+
+/* General */
+.landing-root {
+  font-family: "Segoe UI", sans-serif;
+  color: #1f2937;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.5s ease;
+}
+
+.landing-root:hover {
+  background: linear-gradient(135deg, #e6f3ff 0%, #d6f2f7 100%);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+  color: #0f172a;
+  text-align: center;
+  padding: 6rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle, rgba(0, 180, 255, 0.15) 0%, transparent 70%);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-title {
+  position: relative;
+  z-index: 1;
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #0f172a;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.hero-title:hover {
+  color: #0077b6;
+  text-shadow: 0 0 12px rgba(0, 180, 255, 0.4);
+}
+
+.highlight {
+  color: #007bff;
+  text-shadow: 0 0 8px rgba(0, 180, 255, 0.3);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.highlight:hover {
+  color: #005f99;
+  text-shadow: 0 0 12px rgba(0, 180, 255, 0.5);
+}
+
+.hero-subtitle {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #334155;
+  transition: color 0.3s ease;
+}
+
+.hero-subtitle:hover {
+  color: #0077b6;
+}
+
+/* Hero Buttons */
+.hero-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 180, 255, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0096c7, #005f99);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 16px rgba(0, 180, 255, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #00b4d8;
+  color: #0077b6;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 180, 255, 0.08);
+  border-color: #0096c7;
+  color: #005f99;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 180, 255, 0.3);
+}
+
+/* Feature Cards */
+.features {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #0f172a;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 180, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 180, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  position: relative;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 180, 255, 0.25);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.feature-card h3 {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: #0077b6;
+  transition: color 0.3s ease;
+}
+
+.feature-card h3:hover {
+  color: #0096c7;
+}
+
+.feature-card p {
+  color: #334155;
+  transition: color 0.3s ease;
+}
+
+.feature-card p:hover {
+  color: #0f172a;
+}
+
+/* Section */
+.section {
+  padding: 5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f8fdff, #e0f7fa);
+  transition: background 0.5s ease;
+}
+
+.section:hover {
+  background: linear-gradient(135deg, #f0f9ff, #d6f2f7);
+}
+
+.section-title {
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #0f172a;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.section-title:hover {
+  color: #0077b6;
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.3);
+}
+
+.section-title .blue {
+  color:  #0096c7;
+  transition: color 0.3s ease;
+}
+
+.section-title .blue:hover {
+  color: #0096c7;
+}
+
+.section-subtitle {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #475569;
+  transition: color 0.3s ease;
+}
+
+.section-subtitle:hover {
+  color: #334155;
+}
+
+/* CTA Section */
+.cta-section {
+  background:  rgba(255, 255, 255, 0.85);
+  padding: 5rem 1.5rem;
+  text-align: center;
+}
+
+.cta-section h2 {
+  color: #023e8a;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.cta-section .green {
+  color: #00b4d8;
+}
+
+.cta-section p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #334155;
+}
+
+.cta-section .btn-primary {
+  margin-top: 1.5rem;
+}

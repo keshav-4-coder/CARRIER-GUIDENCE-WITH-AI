@@ -1,0 +1,22 @@
+Django==4.2.7
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0
+django-cors-headers==4.3.0
+django-filter==23.3
+python-dotenv==1.0.0
+
+# Google OAuth
+google-auth==2.25.2
+google-auth-oauthlib==1.1.0
+google-auth-httplib2>=0.2.0,<1.0.0
+
+# Anthropic API (NEW SDK)
+anthropic>=0.25.0
+httpx>=0.23.0,<0.28.0
+
+# Database (if using PostgreSQL later)
+# psycopg2-binary==2.9.9
+
+# For production
+gunicorn==21.2.0
+whitenoise==6.6.0
