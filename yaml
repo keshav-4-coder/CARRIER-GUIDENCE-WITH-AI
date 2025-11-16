@@ -1,3 +1,10 @@
+databases:
+  - name: carrier-guidance-db
+    databaseName: carrier_ai
+    user: carrier_ai
+    plan: free
+    region: oregon
+
 services:
   - type: web
     name: carrier-guidance-ai
@@ -9,6 +16,9 @@ services:
       pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt
       
+      # Run database migrations
+      python manage.py migrate --noinput
+      
       # Collect Django static files
       python manage.py collectstatic --noinput
       
@@ -16,13 +26,23 @@ services:
       cd ../myproject-frontend
       npm install
       npm run build
-    startCommand: gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.13.4
+        value: 3.11.0
       - key: DJANGO_SETTINGS_MODULE
-        value: myproject.settings
+        value: backend.settings
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: False
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: carrier-guidance-db
+          property: connectionString
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
