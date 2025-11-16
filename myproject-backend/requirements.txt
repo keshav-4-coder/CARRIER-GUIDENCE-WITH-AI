@@ -15,8 +15,9 @@ anthropic>=0.25.0
 httpx>=0.23.0,<0.28.0
 anthropic
 
-# Database (if using PostgreSQL later)
-# psycopg2-binary==2.9.9
+# Database - PostgreSQL for Render
+psycopg2-binary==2.9.9
+dj-database-url==2.1.0
 
 # For production
 gunicorn==21.2.0
